@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Казахстанский Рис | Премиум качество</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-black: #0a0a0a;
+            --primary-gray: #2a2a2a;
+            --accent-orange: #d4a373;
+            --accent-orange-light: #e9c9a0;
+            --accent-orange-bright: #f0d5b0;
+            --text-light: #f5f0eb;
+            --text-gray: #c4b8a8;
+            --border-color: #3d352e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--primary-black);
+            color: var(--text-light);
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .hero {
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+            padding: 160px 0;
+            text-align: center;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: var(--primary-black);
+        }
+        
+        .hero-image-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85));
+            z-index: 2;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        
+        .hero .subtitle {
+            font-size: 2.2rem;
+            color: var(--accent-orange-light);
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 8px;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .hero .btn {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 16px 45px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero .btn:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.4);
+        }
+        
+        header {
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        
+        .logo i {
+            color: var(--accent-orange-bright);
+            margin-right: 8px;
+        }
+        
+        .logo:hover {
+            color: var(--accent-orange);
+        }
+        
+        .company-badge {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-badge:hover {
+            opacity: 1;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--accent-orange-bright);
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-orange-bright);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-name {
+            color: var(--accent-orange-bright);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .btn-small {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .btn-small:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .popular-movies {
+            padding: 80px 0;
+            background: var(--primary-black);
+        }
+        
+        .popular-movies h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.8rem;
+            color: white;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .popular-movies h2 span {
+            color: var(--accent-orange-bright);
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+        
+        .movie-card {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent-orange);
+        }
+        
+        .movie-poster {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        
+        .movie-info {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .movie-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.4rem;
+            color: white;
+            line-height: 1.4;
+            letter-spacing: 1px;
+        }
+        
+        .movie-info .variety {
+            color: var(--accent-orange-bright);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .rating {
+            color: var(--accent-orange-bright);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+        
+        .movie-info p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .movie-info .btn-details {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .movie-info .btn-details:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 163, 115, 0.3);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background: var(--primary-dark);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .feature {
+            padding: 35px 30px;
+            background: var(--primary-gray);
+            border-radius: 16px;
+            transition: transform 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+        }
+        
+        .feature i {
+            color: var(--accent-orange-bright);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .feature p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        .contact-section {
+            padding: 60px 0;
+            background: var(--primary-black);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .contact-item {
+            padding: 25px;
+            background: var(--primary-gray);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .contact-item h4 {
+            color: var(--accent-orange-bright);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .contact-item p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .contact-item i {
+            color: var(--accent-orange-bright);
+            margin-right: 10px;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid var(--accent-orange);
+        }
+        
+        footer p {
+            color: var(--text-gray);
+            margin: 8px 0;
+        }
+        
+        .movie-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: var(--primary-gray);
+            width: 90%;
+            max-width: 800px;
+            margin: 60px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: modalFade 0.3s;
+            border: 1px solid var(--accent-orange);
+        }
+        
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 20px 25px;
+            background: var(--primary-dark);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--accent-orange);
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        
+        .modal-poster {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .movie-details p {
+            color: var(--text-light);
+            margin: 12px 0;
+        }
+        
+        .movie-details strong {
+            color: var(--accent-orange-bright);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.1);
+            color: var(--accent-orange-bright);
+        }
+        
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-orange-bright);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: none;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            background: var(--accent-orange);
+        }
+        
+        .chat-button i {
+            font-size: 28px;
+            color: var(--primary-black);
+        }
+        
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--primary-gray);
+            border-radius: 15px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--accent-orange);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chat-window.active {
+            display: flex;
+        }
+        
+        .chat-header {
+            background: var(--accent-orange);
+            padding: 15px;
+            color: var(--primary-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h4 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        
+        .chat-header i {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .message.user {
+            background: var(--accent-orange-bright);
+            color: var(--primary-black);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message.bot {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px 14px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            outline: none;
+        }
+        
+        .chat-input input:focus {
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .chat-input button {
+            background: var(--accent-orange-bright);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chat-input button:hover {
+            background: var(--accent-orange);
+        }
+        
+        .chat-input button i {
+            color: var(--primary-black);
+            font-size: 1rem;
+        }
+        
+        .typing {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .typing span {
+            animation: blink 1.4s infinite;
+        }
+        
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes blink {
+            0%, 60%, 100% { opacity: 0; }
+            30% { opacity: 1; }
+        }
+        
+        @media (max-width: 992px) {
+            .movies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links li a {
+                font-size: 0.85rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            .company-badge {
+                font-size: 0.6rem;
+                padding: 2px 10px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0;
+                min-height: 450px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero .subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .user-section {
+                margin-top: 10px;
+            }
+            .movies-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .popular-movies {
+                padding: 50px 0;
+            }
+            .popular-movies h2 {
+                font-size: 2rem;
+            }
+            .chat-window {
+                width: 320px;
+                height: 450px;
+                right: 0;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+            .hero .btn {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+            .chat-window {
+                width: 300px;
+                height: 420px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="/" class="logo"><i class="fas fa-seedling"></i> Казахстанский Рис</a>
+            
+            <!-- УПОМИНАНИЕ ООО «СВ-КАПИТАЛ» В УГЛУ -->
+            <span class="company-badge">ООО «СВ-КАПИТАЛ»</span>
+            
+            <ul class="nav-links">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/schedule">О компании</a></li>
+                <li><a href="/movies-page">Сорта</a></li>
+                <li><a href="/reviews-page">Отзывы</a></li>
+                <li><a href="/request">Заявка</a></li>
+                <li><a href="/profile">Профиль</a></li>
+                <li><a href="/admin" id="adminLink" style="display: none;">Админ</a></li>
+            </ul>
+            <div class="user-section">
+                <div id="userDisplay" style="display: none;" class="user-info">
+                    <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                    <span class="user-name" id="username"></span>
+                </div>
+                <a href="/login" class="btn-small" id="loginBtn">Вход</a>
+                <a href="/register" class="btn-small" id="registerBtn">Регистрация</a>
+                <a href="#" class="btn-small" id="logoutBtn" style="display: none;">Выход</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <section class="hero" id="heroSection">
+        <img class="hero-image-bg" 
+             src="https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+             alt="Казахстанский рис"
+             onerror="this.src='https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'">
+        <div class="hero-overlay"></div>
+        
+        <div class="container">
+            <h1>Казахстанский Рис</h1>
+            <div class="subtitle">Премиум качества</div>
+            <p>Сорта <strong>«Янтарь»</strong>, <strong>«Лидер»</strong> и <strong>«Камолино»</strong> — выращены на чистых полях Казахстана с любовью и заботой.</p>
+            <a href="/movies-page" class="btn" style="margin-top: 20px;">
+                <i class="fas fa-shopping-bag"></i> В каталог
+            </a>
+        </div>
+    </section>
+
+    <section class="popular-movies">
+        <div class="container">
+            <h2>Наши <span>сорта</span> риса</h2>
+            <div class="movies-grid" id="moviesGrid">
+                <div class="movie-card">
+                    <img src="https://sun9-86.userapi.com/s/v1/ig2/NPD5L-qos9GgMxVTffkLO31_SzbVC_XSFE8zwlTRNwoT7pWqhZOlzsVR71n47K69k5C5-juXkTg3w6y-u0li2FFf.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=i9WLFeOL3X8hyNrgpNTCYyzVfQoyISJg5-aIYgKl-Yc&cs=540x0" 
+                         alt="Рис Янтарь" 
+                         class="movie-poster"
+                         onerror="this.src='https://via.placeholder.com/300x240?text=Рис+Янтарь'">
+                    <div class="movie-info">
+                        <h3>Янтарь</h3>
+                        <div class="variety">✦ Элитный сорт</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 4.9 ★
+                        </div>
+                        <p>Длиннозерный рис с нежным ароматом и янтарным оттенком. Идеален для плова и гарниров. Высокое содержание амилозы.</p>
+                        <button class="btn-details" onclick="showMovieDetails('yantar')">
+                            <i class="fas fa-info-circle"></i> Подробнее
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <img src="https://sun9-74.userapi.com/s/v1/ig2/5RlECk6Cvh3quWwAl_xtEHxd7d2a0eDfqWHC_rd6229nPN_r93vG4Ur8sLm6Erd5UN9e0jrTugx4I8SQQWl56QOb.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=8jKj-SyH70sYsbzCdkwRYc_oVPEtW44hxiwHSj3LyG8&cs=540x0" 
+                         alt="Рис Лидер" 
+                         class="movie-poster"
+                         onerror="this.src='https://via.placeholder.com/300x240?text=Рис+Лидер'">
+                    <div class="movie-info">
+                        <h3>Лидер</h3>
+                        <div class="variety">✦ Премиум класс</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 4.8 ★
+                        </div>
+                        <p>Круглозерный рис высокой степени очистки. Отличается отличной клейковиной, подходит для суши, каш и запеканок.</p>
+                        <button class="btn-details" onclick="showMovieDetails('lider')">
+                            <i class="fas fa-info-circle"></i> Подробнее
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <img src="https://sun9-2.userapi.com/s/v1/ig2/dj-xY2Ddo1q0ColiqzfxzWswrOjNN9AJ0ftesg3ZjT7J815dfoCiqnXNpjQqQ0-P9yX3Q3zSROi7w9UuUnQDmS49.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=-Ji77MgTsb9Hjmuwfgal2HLiu-Sclfl1kJHBTIku_rY&cs=540x0" 
+                         alt="Рис Камолино" 
+                         class="movie-poster"
+                         onerror="this.src='https://via.placeholder.com/300x240?text=Рис+Камолино'">
+                    <div class="movie-info">
+                        <h3>Камолино</h3>
+                        <div class="variety">✦ Эксклюзив</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 5.0 ★
+                        </div>
+                        <p>Уникальный сорт с кремовым оттенком и ореховым ароматом. Проходит дополнительную шлифовку для идеального вкуса.</p>
+                        <button class="btn-details" onclick="showMovieDetails('kamolino')">
+                            <i class="fas fa-info-circle"></i> Подробнее
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-tractor fa-3x"></i>
+                    <h3>Собственное производство</h3>
+                    <p>Выращиваем рис на собственных полях Казахстана. Полный контроль от посева до упаковки.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle fa-3x"></i>
+                    <h3>Контроль качества</h3>
+                    <p>На каждом этапе производства — строгий контроль качества. Сертификаты соответствия ГОСТ.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-truck fa-3x"></i>
+                    <h3>Оптовые поставки</h3>
+                    <p>Работаем с оптовыми покупателями по всей России. Гибкие условия и индивидуальный подход.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4><i class="fas fa-phone"></i> Отдел продаж</h4>
+                    <p><i class="fas fa-phone-alt"></i> 8 (961) 924-50-24</p>
+                    <p><i class="fas fa-phone-alt"></i> 8 (901) 115-63-63</p>
+                </div>
+                <div class="contact-item">
+                    <h4><i class="fas fa-clipboard-check"></i> Отдел качества</h4>
+                    <p><i class="fas fa-phone-alt"></i> 8 (961) 924-50-24</p>
+                </div>
+                <div class="contact-item">
+                    <h4><i class="fas fa-envelope"></i> Электронная почта</h4>
+                    <p><i class="fas fa-envelope"></i> oren-svcapital@mail.ru</p>
+                </div>
+                <div class="contact-item">
+                    <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+                    <p>Оренбург, Загородное шоссе, д. 13/8</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="movieModal" class="movie-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalMovieTitle"></h2>
+                <button class="close-modal" onclick="closeMovieModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img id="modalMoviePoster" class="modal-poster" src="" alt="">
+                </div>
+                <div>
+                    <div class="movie-details">
+                        <p><strong>Сорт:</strong> <span id="modalMovieVariety"></span></p>
+                        <p><strong>Тип зерна:</strong> <span id="modalMovieType"></span></p>
+                        <p><strong>Страна производства:</strong> <span id="modalMovieCountry"></span></p>
+                        <p><strong>Рейтинг:</strong> <span id="modalMovieRating"></span> ★</p>
+                        <div style="margin: 20px 0;">
+                            <strong>Описание:</strong>
+                            <p id="modalMovieDescription" style="margin-top: 10px; line-height: 1.8;"></p>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <strong>Применение:</strong>
+                            <p id="modalMovieUse" style="margin-top: 8px; line-height: 1.6;"></p>
+                        </div>
+                        <div style="display: flex; gap: 15px; margin-top: 25px;">
+                            <a href="/request" class="btn-details" style="background: var(--accent-orange); color: var(--primary-black); padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block; text-align: center; flex: 1; font-weight: 700; text-transform: uppercase;">Оставить заявку</a>
+                            <button class="btn-details" onclick="closeMovieModal()" style="background: transparent; border: 1px solid var(--accent-orange); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; flex: 1;">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Чат -->
+    <div class="chat-widget">
+        <div class="chat-button" id="chatButton">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h4><i class="fas fa-seedling"></i> Рисовый помощник</h4>
+                <i class="fas fa-times" id="closeChat"></i>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    Здравствуйте! Я помогу вам выбрать лучший сорт казахстанского риса. Расскажу о сортах «Янтарь», «Лидер» и «Камолино», условиях поставки и ценах. Задавайте вопросы!
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Задайте вопрос о рисе..." onkeypress="handleChatKeyPress(event)">
+                <button id="sendChatBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Казахстанский Рис — премиум качество. Все права защищены.</p>
+            <p><i class="fas fa-phone"></i> Отдел продаж: 8 (961) 924-50-24 | 8 (901) 115-63-63</p>
+            <p><i class="fas fa-envelope"></i> Email: oren-svcapital@mail.ru</p>
+            <p><i class="fas fa-map-marker-alt"></i> Адрес: Оренбург, Загородное шоссе, д. 13/8</p>
+        </div>
+    </footer>
+
+    <script>
+        const moviesData = {
+            yantar: {
+                title: 'Рис «Янтарь»',
+                poster: 'https://sun9-86.userapi.com/s/v1/ig2/NPD5L-qos9GgMxVTffkLO31_SzbVC_XSFE8zwlTRNwoT7pWqhZOlzsVR71n47K69k5C5-juXkTg3w6y-u0li2FFf.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=i9WLFeOL3X8hyNrgpNTCYyzVfQoyISJg5-aIYgKl-Yc&cs=540x0',
+                variety: 'Элитный',
+                type: 'Длиннозерный',
+                country: 'Казахстан',
+                rating: '4.9',
+                description: 'Рис «Янтарь» — гордость нашего производства. Выращивается на экологически чистых полях Казахстана. Зерно имеет красивый янтарный оттенок и тонкий аромат. Проходит многоступенчатую очистку и калибровку.',
+                use: 'Идеально подходит для приготовления плова, гарниров, салатов. Благодаря низкой клейковине зерна остаются рассыпчатыми даже после длительной варки.'
+            },
+            lider: {
+                title: 'Рис «Лидер»',
+                poster: 'https://sun9-74.userapi.com/s/v1/ig2/5RlECk6Cvh3quWwAl_xtEHxd7d2a0eDfqWHC_rd6229nPN_r93vG4Ur8sLm6Erd5UN9e0jrTugx4I8SQQWl56QOb.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=8jKj-SyH70sYsbzCdkwRYc_oVPEtW44hxiwHSj3LyG8&cs=540x0',
+                variety: 'Премиум',
+                type: 'Круглозерный',
+                country: 'Казахстан',
+                rating: '4.8',
+                description: 'Рис «Лидер» — выбор профессионалов. Круглое зерно высокой степени очистки обладает отличной клейковиной и насыщенным вкусом. Проходит тщательный контроль качества на каждом этапе.',
+                use: 'Отлично подходит для суши, роллов, каш-размазней, пудингов, запеканок и детского питания. Идеально сохраняет форму при термической обработке.'
+            },
+            kamolino: {
+                title: 'Рис «Камолино»',
+                poster: 'https://sun9-2.userapi.com/s/v1/ig2/dj-xY2Ddo1q0ColiqzfxzWswrOjNN9AJ0ftesg3ZjT7J815dfoCiqnXNpjQqQ0-P9yX3Q3zSROi7w9UuUnQDmS49.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1000x1000&from=bu&u=-Ji77MgTsb9Hjmuwfgal2HLiu-Sclfl1kJHBTIku_rY&cs=540x0',
+                variety: 'Эксклюзив',
+                type: 'Круглозерный (шлифованный)',
+                country: 'Казахстан',
+                rating: '5.0',
+                description: 'Рис «Камолино» — уникальный сорт с кремовым оттенком и легким ореховым ароматом. Проходит дополнительную шлифовку, что придает зернам особую гладкость и шелковистость.',
+                use: 'Идеален для приготовления плова, ризотто, десертов, молочных каш. Благодаря особой обработке зерна не развариваются и сохраняют аппетитный вид.'
+            }
+        };
+
+        // Чат
+        const chatButton = document.getElementById('chatButton');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeChat = document.getElementById('closeChat');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendChatBtn');
+
+        chatButton.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+
+        function addMessage(text, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.innerHTML = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing bot';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<span>●</span><span>●</span><span>●</span>';
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            chatInput.value = '';
+
+            showTyping();
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+                hideTyping();
+                addMessage(data.reply, false);
+            } catch (error) {
+                hideTyping();
+                addMessage('Извините, сервер временно недоступен. Звоните нам: 8 (961) 924-50-24', false);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function showMovieDetails(movieId) {
+            const movie = moviesData[movieId];
+            if (!movie) return;
+            
+            document.getElementById('modalMovieTitle').textContent = movie.title;
+            document.getElementById('modalMoviePoster').src = movie.poster;
+            document.getElementById('modalMovieVariety').textContent = movie.variety;
+            document.getElementById('modalMovieType').textContent = movie.type;
+            document.getElementById('modalMovieCountry').textContent = movie.country;
+            document.getElementById('modalMovieRating').textContent = movie.rating;
+            document.getElementById('modalMovieDescription').textContent = movie.description;
+            document.getElementById('modalMovieUse').textContent = movie.use;
+            
+            document.getElementById('movieModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMovieModal() {
+            document.getElementById('movieModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('movieModal');
+            if (event.target === modal) closeMovieModal();
+        });
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeMovieModal();
+        });
+        
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                
+                if (data.user) {
+                    const user = data.user;
+                    document.getElementById('username').textContent = user.username;
+                    document.getElementById('loginBtn').style.display = 'none';
+                    document.getElementById('registerBtn').style.display = 'none';
+                    document.getElementById('logoutBtn').style.display = 'inline-block';
+                    document.getElementById('userDisplay').style.display = 'flex';
+                    
+                    const avatarImg = document.getElementById('userAvatar');
+                    if (user.avatar_url && user.avatar_url !== 'null') {
+                        avatarImg.src = user.avatar_url;
+                    } else {
+                        avatarImg.src = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(user.username)}`;
+                    }
+                    
+                    if (user.role === 'admin') {
+                        document.getElementById('adminLink').style.display = 'block';
+                    }
+                } else {
+                    document.getElementById('userDisplay').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки данных пользователя:', error);
+            }
+        }
+        
+        document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await fetch('/logout');
+            window.location.reload();
+        });
+        
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        document.addEventListener('DOMContentLoaded', loadUserData);
+        
+        window.showMovieDetails = showMovieDetails;
+        window.closeMovieModal = closeMovieModal;
+
+        function showGlobalNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'warning' ? '#f44336' : (type === 'success' ? '#4caf50' : '#ff9800')};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                z-index: 10001;
+                font-size: 14px;
+                font-family: 'Georgia', serif;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideInNotif 0.3s ease;
+                cursor: pointer;
+            `;
+            notification.innerHTML = `<i class="fas ${type === 'warning' ? 'fa-exclamation-triangle' : (type === 'success' ? 'fa-check-circle' : 'fa-info-circle')}"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutNotif 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        if (!document.querySelector('#notif-style')) {
+            const notifStyle = document.createElement('style');
+            notifStyle.id = 'notif-style';
+            notifStyle.textContent = `
+                @keyframes slideInNotif {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOutNotif {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(notifStyle);
+        }
+    </script>
+    
+</body>
+</html>

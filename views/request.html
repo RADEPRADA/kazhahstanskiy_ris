@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оставить заявку | Казахстанский Рис</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-black: #0a0a0a;
+            --primary-gray: #2a2a2a;
+            --accent-orange: #d4a373;
+            --accent-orange-light: #e9c9a0;
+            --accent-orange-bright: #f0d5b0;
+            --text-light: #f5f0eb;
+            --text-gray: #c4b8a8;
+            --border-color: #3d352e;
+            --discount-color: #4caf50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--primary-black);
+            color: var(--text-light);
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        header {
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        
+        .logo i {
+            color: var(--accent-orange-bright);
+            margin-right: 8px;
+        }
+        
+        .logo:hover {
+            color: var(--accent-orange);
+        }
+        
+        .company-badge {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-badge:hover {
+            opacity: 1;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--accent-orange-bright);
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-orange-bright);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-name {
+            color: var(--accent-orange-bright);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .btn-small {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .btn-small:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            padding: 25px 0;
+            text-align: center;
+            border-top: 2px solid var(--accent-orange);
+            margin-top: 60px;
+        }
+        
+        footer p {
+            color: var(--text-gray);
+            margin: 5px 0;
+            font-size: 0.8rem;
+        }
+        
+        .request-header {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .request-header h1 {
+            font-size: 2rem;
+            color: var(--primary-black);
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+        
+        .request-header p {
+            color: var(--primary-black);
+            opacity: 0.85;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .request-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--primary-gray);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group label .required {
+            color: #f44336;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .form-group select option {
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 16px;
+            background: var(--primary-dark);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .radio-option:hover {
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin: 0;
+        }
+        
+        .radio-option.selected {
+            border-color: var(--accent-orange-bright);
+            background: rgba(212, 163, 115, 0.15);
+        }
+        
+        .messenger-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        .packaging-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .packaging-option {
+            background: var(--primary-dark);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .packaging-option:hover {
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .packaging-option.selected {
+            border-color: var(--accent-orange-bright);
+            background: rgba(212, 163, 115, 0.15);
+        }
+        
+        .packaging-option .weight {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        
+        .packaging-option .price {
+            font-size: 0.85rem;
+            color: var(--accent-orange-bright);
+            margin-top: 4px;
+        }
+        
+        .packaging-option .per-kg {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+        }
+        
+        .packaging-option input[type="radio"] {
+            display: none;
+        }
+        
+        .price-preview {
+            background: var(--primary-dark);
+            border: 2px solid var(--accent-orange-bright);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0 15px 0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .price-preview.discount-active {
+            border-color: var(--discount-color);
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .price-preview h4 {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .price-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-orange-bright);
+        }
+        
+        .price-old {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: #f44336;
+        }
+        
+        .discount-badge {
+            background: var(--discount-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .price-saving {
+            margin-top: 8px;
+            color: var(--discount-color);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .price-saving i {
+            margin-right: 5px;
+        }
+        
+        .price-per-unit {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-top: 8px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            background: var(--accent-orange-bright);
+            color: var(--primary-black);
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .btn-submit:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 20px;
+            text-align: center;
+            color: #4caf50;
+            display: none;
+            font-size: 0.85rem;
+        }
+        
+        .error-message {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 20px;
+            text-align: center;
+            color: #f44336;
+            display: none;
+            font-size: 0.85rem;
+        }
+        
+        small {
+            color: var(--text-gray);
+            font-size: 0.7rem;
+        }
+        
+        .info-hint {
+            background: rgba(212, 163, 115, 0.1);
+            border: 1px dashed var(--accent-orange);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        
+        .info-hint i {
+            color: var(--accent-orange-bright);
+            margin-right: 6px;
+        }
+        
+        .packaging-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links li a {
+                font-size: 0.85rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            .company-badge {
+                font-size: 0.6rem;
+                padding: 2px 10px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .user-section {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            .request-form-container {
+                padding: 25px;
+            }
+            .radio-group {
+                flex-direction: column;
+            }
+            .request-header h1 {
+                font-size: 1.5rem;
+            }
+            .price-amount {
+                font-size: 1.4rem;
+            }
+            .price-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .packaging-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .request-form-container {
+                padding: 20px;
+            }
+            .packaging-group {
+                grid-template-columns: 1fr 1fr;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo"><i class="fas fa-seedling"></i> Казахстанский Рис</a>
+            <span class="company-badge">ООО «СВ-КАПИТАЛ»</span>
+            <ul class="nav-links">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/schedule">О компании</a></li>
+                <li><a href="/movies-page">Сорта</a></li>
+                <li><a href="/reviews-page">Отзывы</a></li>
+                <li><a href="/request">Заявка</a></li>
+                <li><a href="/profile">Профиль</a></li>
+                <li><a href="/admin" id="adminLink" style="display: none;">Админ</a></li>
+            </ul>
+            <div class="user-section">
+                <div id="userDisplay" style="display: none;" class="user-info">
+                    <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                    <span class="user-name" id="username"></span>
+                </div>
+                <a href="/login" class="btn-small" id="loginBtn">Вход</a>
+                <a href="/register" class="btn-small" id="registerBtn">Регистрация</a>
+                <a href="#" class="btn-small" id="logoutBtn" style="display: none;">Выход</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <div class="request-header">
+        <div class="container">
+            <h1><i class="fas fa-seedling"></i> Оставить заявку</h1>
+            <p>Заполните форму, и мы свяжемся с вами для уточнения деталей</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="request-form-container">
+            <form id="requestForm">
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Номер телефона <span class="required">*</span></label>
+                    <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-comment-dots"></i> Удобный мессенджер <span class="required">*</span></label>
+                    <div class="radio-group" id="messengerGroup">
+                        <label class="radio-option">
+                            <input type="radio" name="messenger" value="vk"> 
+                            <i class="fab fa-vk messenger-icon" style="color: #0077FF; font-size: 1.1rem;"></i>
+                            <span>VK</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="messenger" value="max"> 
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_MAX.svg/3840px-%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_MAX.svg.png" class="messenger-icon" alt="MAX">
+                            <span>MAX</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-at"></i> Контакт в мессенджере <span class="required">*</span></label>
+                    <input type="text" id="messengerContact" placeholder="@username или +7..." required>
+                    <small>Укажите ваш логин или номер для связи</small>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-seedling"></i> Сорт риса <span class="required">*</span></label>
+                    <select id="material" required>
+                        <option value="">Выберите сорт риса</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="packaging-label"><i class="fas fa-weight"></i> Фасовка (вес упаковки) <span class="required">*</span></label>
+                    <div class="packaging-group" id="packagingGroup"></div>
+                    <small id="packagingHint">Выберите сорт риса, чтобы увидеть доступную фасовку</small>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-box"></i> Количество упаковок <span class="required">*</span></label>
+                    <input type="number" id="volume" step="1" min="1" placeholder="Например: 10" required>
+                    <div class="info-hint">
+                        <i class="fas fa-gift"></i> При заказе от 10 упаковок — скидка <strong>10%</strong> на весь заказ!
+                    </div>
+                </div>
+                
+                <div id="pricePreview" class="price-preview">
+                    <h4><i class="fas fa-calculator"></i> Стоимость заказа</h4>
+                    <div class="price-row">
+                        <span class="price-amount" id="totalPrice">0 ₽</span>
+                        <span class="price-old" id="oldPrice"></span>
+                        <span class="discount-badge" id="discountBadge" style="display: none;">-10%</span>
+                    </div>
+                    <div class="price-saving" id="savingText" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Экономия: <span id="savingAmount">0</span> ₽
+                    </div>
+                    <div class="price-per-unit" id="perUnitPrice">Цена за упаковку: <span id="unitPrice">0</span> ₽</div>
+                    <div class="price-per-unit" id="perKgPrice">Цена за кг: <span id="kgPrice">0</span> ₽</div>
+                    <div class="price-per-unit" id="totalKgInfo">Общий вес: <span id="totalKg">0</span> кг</div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-building"></i> Тип клиента <span class="required">*</span></label>
+                    <div class="radio-group" id="clientTypeGroup">
+                        <label class="radio-option">
+                            <input type="radio" name="clientType" value="physical"> 
+                            <i class="fas fa-user"></i>
+                            <span>Физ. лицо</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="clientType" value="legal"> 
+                            <i class="fas fa-building"></i>
+                            <span>Юр. лицо</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-comment"></i> Комментарий</label>
+                    <textarea id="comment" rows="3" placeholder="Желаемый сорт, тип упаковки, особые пожелания по доставке..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Отправить заявку
+                </button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i> Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+            </div>
+            
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Казахстанский Рис — премиум качество. Все права защищены.</p>
+            <p><i class="fas fa-phone"></i> Отдел продаж: 8 (961) 924-50-24 | 8 (901) 115-63-63</p>
+            <p><i class="fas fa-envelope"></i> Email: oren-svcapital@mail.ru</p>
+            <p><i class="fas fa-map-marker-alt"></i> Адрес: Оренбург, Загородное шоссе, д. 13/8</p>
+        </div>
+    </footer>
+
+    <script>
+        const packagingData = {
+            'БАРАКАТ': [
+                { weight: '25 кг', weightNum: 25, price: 95, perKg: 95 },
+                { weight: '5 кг', weightNum: 5, price: 99, perKg: 99 }
+            ],
+            'ЯНТАРЬ': [
+                { weight: '4,5 кг', weightNum: 4.5, price: 116, perKg: 116 }
+            ],
+            'ЛИДЕР': [
+                { weight: '4,5 кг', weightNum: 4.5, price: 116, perKg: 116 },
+                { weight: '25 кг', weightNum: 25, price: 95, perKg: 95 },
+                { weight: '5 кг', weightNum: 5, price: 99, perKg: 99 }
+            ],
+            'ЭЛИТА': [
+                { weight: '3 кг (вакуум)', weightNum: 3, price: 127, perKg: 127 },
+                { weight: '20 кг (вакуум)', weightNum: 20, price: 104, perKg: 104 },
+                { weight: '3 кг', weightNum: 3, price: 108, perKg: 108 },
+                { weight: '5 кг', weightNum: 5, price: 110, perKg: 110 }
+            ],
+            'КАМОЛИНО': [
+                { weight: '5 кг', weightNum: 5, price: 102, perKg: 102 },
+                { weight: '3 кг', weightNum: 3, price: 104, perKg: 104 }
+            ],
+            'КАМОЛИНО ЛИДЕР': [
+                { weight: '25 кг', weightNum: 25, price: 101, perKg: 101 }
+            ],
+            'КАМОЛИНО ЯНТАРЬ': [
+                { weight: '25 кг', weightNum: 25, price: 101, perKg: 101 }
+            ]
+        };
+
+        let materials = [];
+        let currentPricePerUnit = 0;
+        let currentWeightPerUnit = 0;
+        let currentDiscount = 0;
+        let currentPackaging = null;
+
+        async function loadMaterials() {
+            try {
+                const response = await fetch('/movies');
+                materials = await response.json();
+                const select = document.getElementById('material');
+                select.innerHTML = '<option value="">Выберите сорт риса</option>' + 
+                    materials.map(m => {
+                        let name = m.title;
+                        const match = name.match(/«([^»]*)»/);
+                        if (match) {
+                            name = match[1];
+                        } else {
+                            name = name.replace(/^Сорт\s*/, '');
+                            name = name.replace(/\s*Рис.*$/, '');
+                        }
+                        name = name.trim();
+                        return `<option value="${m.id}" data-name="${name}">${m.title} — ${(m.duration_minutes || 1000).toLocaleString()} ₽ / упаковка</option>`;
+                    }).join('');
+            } catch (error) {
+                console.error('Ошибка загрузки сортов риса:', error);
+            }
+        }
+
+        function getPackagingOptions(riceName) {
+            if (packagingData[riceName]) {
+                return packagingData[riceName];
+            }
+            for (const key of Object.keys(packagingData)) {
+                if (riceName.includes(key) || key.includes(riceName)) {
+                    return packagingData[key];
+                }
+            }
+            const upperName = riceName.toUpperCase();
+            for (const key of Object.keys(packagingData)) {
+                if (upperName.includes(key) || key.includes(upperName)) {
+                    return packagingData[key];
+                }
+            }
+            return null;
+        }
+
+        function renderPackaging(riceName) {
+            const container = document.getElementById('packagingGroup');
+            const hint = document.getElementById('packagingHint');
+            
+            if (!riceName) {
+                container.innerHTML = '';
+                hint.textContent = 'Выберите сорт риса, чтобы увидеть доступную фасовку';
+                hint.style.color = 'var(--text-gray)';
+                return;
+            }
+            
+            const options = getPackagingOptions(riceName);
+            
+            if (!options || options.length === 0) {
+                container.innerHTML = '';
+                hint.textContent = '⚠️ Для этого сорта пока нет доступной фасовки';
+                hint.style.color = '#f44336';
+                return;
+            }
+            
+            hint.textContent = 'Выберите фасовку:';
+            hint.style.color = 'var(--text-gray)';
+            
+            container.innerHTML = options.map((opt, index) => `
+                <label class="packaging-option ${index === 0 ? 'selected' : ''}">
+                    <input type="radio" name="packaging" value="${opt.price}" 
+                           data-weight="${opt.weight}" 
+                           data-weightnum="${opt.weightNum}"
+                           data-price="${opt.price}" 
+                           data-perkg="${opt.perKg}"
+                           ${index === 0 ? 'checked' : ''}>
+                    <div class="weight">${opt.weight}</div>
+                    <div class="price">${opt.price} ₽</div>
+                    <div class="per-kg">${opt.perKg} ₽/кг</div>
+                </label>
+            `).join('');
+            
+            const firstRadio = container.querySelector('input[type="radio"]');
+            if (firstRadio) {
+                firstRadio.checked = true;
+                currentPricePerUnit = parseInt(firstRadio.dataset.price);
+                currentWeightPerUnit = parseFloat(firstRadio.dataset.weightnum);
+                currentPackaging = {
+                    weight: firstRadio.dataset.weight,
+                    weightNum: currentWeightPerUnit,
+                    price: currentPricePerUnit,
+                    perKg: parseInt(firstRadio.dataset.perkg)
+                };
+                calculatePrice();
+            }
+            
+            container.querySelectorAll('.packaging-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    container.querySelectorAll('.packaging-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    currentPricePerUnit = parseInt(radio.dataset.price);
+                    currentWeightPerUnit = parseFloat(radio.dataset.weightnum);
+                    currentPackaging = {
+                        weight: radio.dataset.weight,
+                        weightNum: currentWeightPerUnit,
+                        price: currentPricePerUnit,
+                        perKg: parseInt(radio.dataset.perkg)
+                    };
+                    calculatePrice();
+                });
+            });
+            
+            calculatePrice();
+        }
+
+        document.getElementById('material').addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            const name = selected.dataset.name || '';
+            renderPackaging(name);
+        });
+
+        function calculatePrice() {
+            const quantity = parseInt(document.getElementById('volume').value) || 0;
+            const pricePerUnit = currentPricePerUnit || 0;
+            const weightPerUnit = currentWeightPerUnit || 0;
+            
+            if (quantity <= 0 || pricePerUnit === 0) {
+                document.getElementById('totalPrice').textContent = '0 ₽';
+                document.getElementById('oldPrice').textContent = '';
+                document.getElementById('discountBadge').style.display = 'none';
+                document.getElementById('savingText').style.display = 'none';
+                document.getElementById('pricePreview').classList.remove('discount-active');
+                document.getElementById('unitPrice').textContent = '0';
+                document.getElementById('kgPrice').textContent = currentPackaging ? currentPackaging.perKg : '0';
+                document.getElementById('totalKg').textContent = '0';
+                return;
+            }
+            
+            // Расчёт: количество упаковок × вес упаковки (кг) × цена за кг
+            const totalKg = quantity * weightPerUnit;
+            const totalBeforeDiscount = totalKg * (currentPackaging ? currentPackaging.perKg : 0);
+            
+            const hasDiscount = quantity >= 10;
+            const discountPercent = hasDiscount ? 10 : 0;
+            currentDiscount = discountPercent;
+            
+            const discountAmount = totalBeforeDiscount * (discountPercent / 100);
+            const totalAfterDiscount = totalBeforeDiscount - discountAmount;
+            
+            document.getElementById('totalPrice').textContent = Math.round(totalAfterDiscount).toLocaleString() + ' ₽';
+            document.getElementById('unitPrice').textContent = pricePerUnit.toLocaleString();
+            document.getElementById('kgPrice').textContent = currentPackaging ? currentPackaging.perKg : '0';
+            document.getElementById('totalKg').textContent = totalKg.toFixed(1);
+            
+            if (hasDiscount) {
+                document.getElementById('oldPrice').textContent = Math.round(totalBeforeDiscount).toLocaleString() + ' ₽';
+                document.getElementById('oldPrice').style.display = 'inline';
+                document.getElementById('discountBadge').style.display = 'inline-block';
+                document.getElementById('savingText').style.display = 'block';
+                document.getElementById('savingAmount').textContent = Math.round(discountAmount).toLocaleString();
+                document.getElementById('pricePreview').classList.add('discount-active');
+            } else {
+                document.getElementById('oldPrice').style.display = 'none';
+                document.getElementById('discountBadge').style.display = 'none';
+                document.getElementById('savingText').style.display = 'none';
+                document.getElementById('pricePreview').classList.remove('discount-active');
+            }
+        }
+
+        document.getElementById('volume').addEventListener('input', function() {
+            calculatePrice();
+        });
+
+        document.querySelectorAll('.radio-option input').forEach(radio => {
+            radio.addEventListener('change', function() {
+                this.closest('.radio-group').querySelectorAll('.radio-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.closest('.radio-option').classList.add('selected');
+            });
+        });
+
+        document.getElementById('requestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value.trim();
+            const messenger = document.querySelector('input[name="messenger"]:checked')?.value;
+            const messenger_contact = document.getElementById('messengerContact').value.trim();
+            const material_id = document.getElementById('material').value;
+            const volume = document.getElementById('volume').value;
+            const client_type = document.querySelector('input[name="clientType"]:checked')?.value;
+            const comment = document.getElementById('comment').value;
+            const packaging = document.querySelector('input[name="packaging"]:checked');
+            
+            if (!phone) { showError('Введите номер телефона'); return; }
+            if (!messenger) { showError('Выберите мессенджер'); return; }
+            if (!messenger_contact) { showError('Введите контакт в мессенджере'); return; }
+            if (!material_id) { showError('Выберите сорт риса'); return; }
+            if (!packaging) { showError('Выберите фасовку'); return; }
+            if (!volume || volume < 1) { showError('Введите количество упаковок (не менее 1)'); return; }
+            if (!client_type) { showError('Укажите тип клиента'); return; }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            
+            // Расчёт общей стоимости для отправки
+            const totalKg = parseFloat(volume) * currentWeightPerUnit;
+            const totalPrice = totalKg * (currentPackaging ? currentPackaging.perKg : 0);
+            const finalPrice = currentDiscount > 0 ? totalPrice * (1 - currentDiscount / 100) : totalPrice;
+            
+            try {
+                const response = await fetch('/api/requests', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phone, messenger, messenger_contact,
+                        material_id: parseInt(material_id),
+                        volume: parseFloat(volume),
+                        client_type, comment,
+                        discount: currentDiscount,
+                        packaging: packaging.dataset.weight,
+                        price_per_unit: currentPricePerUnit,
+                        weight_per_unit: currentWeightPerUnit,
+                        total_kg: totalKg,
+                        total_price: Math.round(finalPrice)
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    document.getElementById('requestForm').reset();
+                    document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+                    document.querySelectorAll('.packaging-option').forEach(opt => opt.classList.remove('selected'));
+                    document.getElementById('totalPrice').textContent = '0 ₽';
+                    document.getElementById('oldPrice').textContent = '';
+                    document.getElementById('discountBadge').style.display = 'none';
+                    document.getElementById('savingText').style.display = 'none';
+                    document.getElementById('pricePreview').classList.remove('discount-active');
+                    document.getElementById('packagingGroup').innerHTML = '';
+                    document.getElementById('packagingHint').textContent = 'Выберите сорт риса, чтобы увидеть доступную фасовку';
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000);
+                } else {
+                    showError(data.error || 'Ошибка при отправке заявки');
+                }
+            } catch (error) {
+                showError('Ошибка сервера. Попробуйте позже.');
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить заявку';
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 4000);
+        }
+
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                
+                if (data.user) {
+                    const user = data.user;
+                    document.getElementById('username').textContent = user.username;
+                    document.getElementById('loginBtn').style.display = 'none';
+                    document.getElementById('registerBtn').style.display = 'none';
+                    document.getElementById('logoutBtn').style.display = 'inline-block';
+                    document.getElementById('userDisplay').style.display = 'flex';
+                    
+                    const avatarImg = document.getElementById('userAvatar');
+                    if (user.avatar_url && user.avatar_url !== 'null') {
+                        avatarImg.src = user.avatar_url;
+                    } else {
+                        avatarImg.src = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(user.username)}`;
+                    }
+                    
+                    if (user.role === 'admin') {
+                        document.getElementById('adminLink').style.display = 'block';
+                    }
+                } else {
+                    document.getElementById('userDisplay').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        }
+
+        document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await fetch('/logout');
+            window.location.reload();
+        });
+
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserData();
+            loadMaterials();
+            setTimeout(calculatePrice, 100);
+        });
+    </script>
+</body>
+</html>

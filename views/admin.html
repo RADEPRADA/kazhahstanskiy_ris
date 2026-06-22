@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | Казахстанский Рис</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-black: #0a0a0a;
+            --primary-gray: #2a2a2a;
+            --accent-orange: #d4a373;
+            --accent-orange-light: #e9c9a0;
+            --accent-orange-bright: #f0d5b0;
+            --text-light: #f5f0eb;
+            --text-gray: #c4b8a8;
+            --border-color: #3d352e;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --success: #4caf50;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--primary-black);
+            color: var(--text-light);
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        header {
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        
+        .logo i {
+            color: var(--accent-orange-bright);
+            margin-right: 8px;
+        }
+        
+        .logo:hover {
+            color: var(--accent-orange);
+        }
+        
+        .company-badge {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-badge:hover {
+            opacity: 1;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--accent-orange-bright);
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-orange-bright);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-name {
+            color: var(--accent-orange-bright);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .btn-small {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .btn-small:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 30px 0 60px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-orange-bright);
+            padding-left: 20px;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-orange-bright);
+            letter-spacing: 1px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--accent-orange-bright);
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .stat-label {
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .chart-container {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chart-container h3 {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+        
+        canvas { max-height: 300px; }
+        
+        .admin-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+        
+        .tab-btn:hover {
+            background: var(--primary-gray);
+            color: var(--accent-orange-bright);
+        }
+        
+        .tab-btn.active {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+        }
+        
+        .admin-table {
+            width: 100%;
+            background: var(--primary-gray);
+            border-radius: 16px;
+            overflow-x: auto;
+            display: block;
+            border: 1px solid var(--border-color);
+        }
+        
+        .admin-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+        
+        .admin-table th {
+            background: var(--primary-dark);
+            padding: 12px 10px;
+            text-align: left;
+            color: var(--accent-orange-bright);
+            border-bottom: 1px solid var(--accent-orange);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        .admin-table td {
+            padding: 10px 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+        
+        .admin-table tr:hover {
+            background: rgba(212, 163, 115, 0.05);
+        }
+        
+        .btn {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Georgia', serif;
+        }
+        
+        .btn:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .action-btn.delete {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .status-select {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 4px 8px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-size: 0.75rem;
+        }
+        
+        .status-select:focus {
+            outline: none;
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+            letter-spacing: 2px;
+        }
+        
+        .review-comment {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .review-comment:hover {
+            white-space: normal;
+            cursor: pointer;
+            background: var(--primary-dark);
+            position: absolute;
+            z-index: 100;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-gray);
+            font-family: 'Georgia', serif;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .filter-btn.active {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+        }
+        
+        .discount-badge-table {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: rgba(212, 163, 115, 0.2);
+            color: var(--accent-orange-bright);
+        }
+        
+        .status-working {
+            background: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+        }
+        
+        .status-closed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+        
+        .status-cancelled {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+        
+        .total-price-cell {
+            color: var(--accent-orange-bright);
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            padding: 25px 0;
+            text-align: center;
+            border-top: 2px solid var(--accent-orange);
+            margin-top: 60px;
+        }
+        
+        footer p {
+            color: var(--text-gray);
+            margin: 5px 0;
+            font-size: 0.8rem;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+        
+        .modal-content {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--accent-orange);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .modal-close:hover {
+            transform: scale(1.1);
+            color: var(--accent-orange-bright);
+        }
+        
+        .modal-form input,
+        .modal-form select {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Georgia', serif;
+            margin-bottom: 15px;
+        }
+        
+        .modal-form input:focus,
+        .modal-form select:focus {
+            outline: none;
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .modal-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links li a {
+                font-size: 0.85rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            .company-badge {
+                font-size: 0.6rem;
+                padding: 2px 10px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .user-section {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-table table {
+                min-width: 800px;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tab-btn span {
+                display: none;
+            }
+            .tab-btn i {
+                margin: 0;
+            }
+            .tab-btn {
+                padding: 10px 15px;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo"><i class="fas fa-seedling"></i> Казахстанский Рис</a>
+            <span class="company-badge">ООО «СВ-КАПИТАЛ»</span>
+            <ul class="nav-links">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/schedule">О компании</a></li>
+                <li><a href="/movies-page">Сорта</a></li>
+                <li><a href="/reviews-page">Отзывы</a></li>
+                <li><a href="/request">Заявка</a></li>
+                <li><a href="/profile">Профиль</a></li>
+                <li><a href="/admin">Админ</a></li>
+            </ul>
+            <div class="user-section">
+                <div id="userDisplay" style="display: none;" class="user-info">
+                    <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                    <span class="user-name" id="username"></span>
+                </div>
+                <a href="#" class="btn-small" id="logoutBtn">Выход</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1><i class="fas fa-shield-alt"></i> Административная панель</h1>
+            
+            <div class="admin-tabs">
+                <button class="tab-btn" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line"></i> <span>Дашборд</span>
+                </button>
+                <button class="tab-btn" onclick="showSection('requests')">
+                    <i class="fas fa-clipboard-list"></i> <span>Заявки</span>
+                </button>
+                <button class="tab-btn active" onclick="showSection('reviews')">
+                    <i class="fas fa-star"></i> <span>Отзывы</span>
+                </button>
+                <button class="tab-btn" onclick="showSection('users')">
+                    <i class="fas fa-users"></i> <span>Пользователи</span>
+                </button>
+                <button class="tab-btn" onclick="showSection('materials')">
+                    <i class="fas fa-seedling"></i> <span>Сорта риса</span>
+                </button>
+            </div>
+
+            <!-- ДАШБОРД -->
+            <div id="dashboardSection" class="admin-section" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card"><i class="fas fa-users"></i><div class="stat-value" id="totalUsers">0</div><div class="stat-label">Пользователей</div></div>
+                    <div class="stat-card"><i class="fas fa-clipboard-list"></i><div class="stat-value" id="totalRequests">0</div><div class="stat-label">Заявок</div></div>
+                    <div class="stat-card"><i class="fas fa-star"></i><div class="stat-value" id="totalReviews">0</div><div class="stat-label">Отзывов</div></div>
+                    <div class="stat-card"><i class="fas fa-chart-line"></i><div class="stat-value" id="avgRating">0</div><div class="stat-label">Ср. рейтинг</div></div>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-container"><h3>Заявки по месяцам</h3><canvas id="requestsChart"></canvas></div>
+                    <div class="chart-container"><h3>Популярные сорта риса</h3><canvas id="materialsChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- ЗАЯВКИ -->
+            <div id="requestsSection" class="admin-section" style="display: none;">
+                <h2><i class="fas fa-clipboard-list"></i> Управление заявками</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterRequests('all')">Все</button>
+                    <button class="filter-btn" onclick="filterRequests('active')">Активные</button>
+                    <button class="filter-btn" onclick="filterRequests('working')">В работе</button>
+                    <button class="filter-btn" onclick="filterRequests('closed')">Закрытые</button>
+                </div>
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Телефон</th>
+                                <th>Мессенджер</th>
+                                <th>Контакт</th>
+                                <th>Сорт риса</th>
+                                <th>Кол-во (уп.)</th>
+                                <th>Вес уп. (кг)</th>
+                                <th>Общий вес (кг)</th>
+                                <th>Цена за кг</th>
+                                <th>Итого (₽)</th>
+                                <th>Скидка</th>
+                                <th>Статус</th>
+                                <th>Дата</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsTable"><tr><td colspan="14">Загрузка...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ОТЗЫВЫ -->
+            <div id="reviewsSection" class="admin-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                    <h2><i class="fas fa-star"></i> Все отзывы клиентов</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterReviews('all')">Все отзывы</button>
+                        <button class="filter-btn" onclick="filterReviews('high')">Высокие (4-5⭐)</button>
+                        <button class="filter-btn" onclick="filterReviews('low')">Низкие (1-3⭐)</button>
+                    </div>
+                </div>
+                
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Пользователь</th>
+                                <th>Аватар</th>
+                                <th>Сорт риса</th>
+                                <th>Оценка</th>
+                                <th>Комментарий</th>
+                                <th>Дата</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTable">
+                            <tr><td colspan="8" style="text-align: center;">Загрузка отзывов...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="stats-grid" style="margin-top: 30px;">
+                    <div class="stat-card"><i class="fas fa-star"></i><div class="stat-value" id="avgRatingCard">0</div><div class="stat-label">Средняя оценка</div></div>
+                    <div class="stat-card"><i class="fas fa-smile"></i><div class="stat-value" id="positiveCount">0</div><div class="stat-label">Положительных (4-5⭐)</div></div>
+                    <div class="stat-card"><i class="fas fa-frown"></i><div class="stat-value" id="negativeCount">0</div><div class="stat-label">Отрицательных (1-3⭐)</div></div>
+                </div>
+            </div>
+
+            <!-- ПОЛЬЗОВАТЕЛИ -->
+            <div id="usersSection" class="admin-section" style="display: none;">
+                <h2><i class="fas fa-users"></i> Управление пользователями</h2>
+                <div class="admin-table">
+                    <table>
+                        <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Роль</th><th>Аватар</th><th>Регистрация</th><th>Действия</th></tr></thead>
+                        <tbody id="usersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- СОРТА РИСА -->
+            <div id="materialsSection" class="admin-section" style="display: none;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <h2><i class="fas fa-seedling"></i> Управление сортами риса</h2>
+                    <button class="btn" onclick="openAddMaterialModal()"><i class="fas fa-plus"></i> Добавить сорт</button>
+                </div>
+                <div class="admin-table">
+                    <table>
+                        <thead><tr><th>ID</th><th>Сорт</th><th>Упаковка</th><th>Тип</th><th>Цена (₽)</th><th>Действия</th></tr></thead>
+                        <tbody id="materialsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно -->
+    <div id="addMaterialModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> Добавить сорт риса</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="addMaterialForm" class="modal-form">
+                <label>Название сорта</label>
+                <input type="text" id="materialName" placeholder="Например: Янтарь" required>
+                
+                <label>Тип упаковки</label>
+                <input type="text" id="materialFraction" placeholder="Вакуумная / Стандартная" required>
+                
+                <label>Цена за упаковку (₽)</label>
+                <input type="number" id="materialPrice" placeholder="1000" required>
+                
+                <button type="submit" class="btn" style="width:100%; justify-content:center; margin-top:10px;">
+                    <i class="fas fa-check"></i> Добавить
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Казахстанский Рис — премиум качество. Все права защищены.</p>
+            <p><i class="fas fa-phone"></i> Отдел продаж: 8 (961) 924-50-24 | 8 (901) 115-63-63</p>
+            <p><i class="fas fa-envelope"></i> Email: oren-svcapital@mail.ru</p>
+            <p><i class="fas fa-map-marker-alt"></i> Адрес: Оренбург, Загородное шоссе, д. 13/8</p>
+        </div>
+    </footer>
+
+    <script>
+        let allReviews = [];
+        let currentReviewFilter = 'all';
+        let currentRequestFilter = 'all';
+        let requestsChart, materialsChart;
+
+        async function checkAdmin() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                if (!data.user || data.user.role !== 'admin') {
+                    window.location.href = '/';
+                    return;
+                }
+                document.getElementById('username').textContent = data.user.username;
+                document.getElementById('userDisplay').style.display = 'flex';
+                
+                const avatarImg = document.getElementById('userAvatar');
+                if (data.user.avatar_url && data.user.avatar_url !== 'null') {
+                    avatarImg.src = data.user.avatar_url;
+                } else {
+                    avatarImg.src = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(data.user.username)}`;
+                }
+                
+                await loadReviews();
+                await loadDashboard();
+            } catch (error) {
+                console.error('Ошибка:', error);
+                window.location.href = '/';
+            }
+        }
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(`${sectionName}Section`).style.display = 'block';
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) {
+                event.target.closest('.tab-btn').classList.add('active');
+            }
+            
+            if (sectionName === 'dashboard') loadDashboard();
+            if (sectionName === 'requests') loadRequests();
+            if (sectionName === 'reviews') loadReviews();
+            if (sectionName === 'users') loadUsers();
+            if (sectionName === 'materials') loadMaterials();
+        }
+
+        // ДАШБОРД
+        async function loadDashboard() {
+            try {
+                const [usersRes, requestsRes, reviewsRes] = await Promise.all([
+                    fetch('/api/admin/users'),
+                    fetch('/api/requests?status=all'),
+                    fetch('/reviews')
+                ]);
+                const users = await usersRes.json();
+                const requests = await requestsRes.json();
+                const reviews = await reviewsRes.json();
+                
+                document.getElementById('totalUsers').textContent = users.length || 0;
+                document.getElementById('totalRequests').textContent = requests.length || 0;
+                document.getElementById('totalReviews').textContent = reviews.length || 0;
+                const avg = reviews.length ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1) : 0;
+                document.getElementById('avgRating').textContent = avg;
+                
+                const months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+                const byMonth = new Array(12).fill(0);
+                requests.forEach(r => { if(r.created_at) byMonth[new Date(r.created_at).getMonth()]++; });
+                if(requestsChart) requestsChart.destroy();
+                const ctx = document.getElementById('requestsChart');
+                if(ctx) {
+                    requestsChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: { labels: months, datasets: [{ label: 'Заявки', data: byMonth, backgroundColor: '#d4a373' }] },
+                        options: { responsive: true }
+                    });
+                }
+                
+                const riceCount = {};
+                requests.forEach(r => { if(r.material_name) riceCount[r.material_name] = (riceCount[r.material_name] || 0) + 1; });
+                const top = Object.entries(riceCount).slice(0,5);
+                if(materialsChart) materialsChart.destroy();
+                const ctx2 = document.getElementById('materialsChart');
+                if(ctx2 && top.length) {
+                    materialsChart = new Chart(ctx2, {
+                        type: 'pie',
+                        data: { labels: top.map(t=>t[0]), datasets: [{ data: top.map(t=>t[1]), backgroundColor: ['#d4a373','#e9c9a0','#f0d5b0','#c9a84c','#f5e3c3'] }] },
+                        options: { responsive: true }
+                    });
+                }
+            } catch(e) { console.error('Dashboard error:', e); }
+        }
+
+        // ОТЗЫВЫ
+        async function loadReviews() {
+            const tbody = document.getElementById('reviewsTable');
+            try {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Загрузка...</td></tr>';
+                const response = await fetch('/reviews');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Нет отзывов</td></tr>';
+                    return;
+                }
+                allReviews = data;
+                displayReviews();
+                updateReviewStats();
+            } catch (error) {
+                console.error('Ошибка:', error);
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #f44336;">Ошибка загрузки отзывов</td></tr>';
+            }
+        }
+
+        function displayReviews() {
+            let filtered = [...allReviews];
+            if (currentReviewFilter === 'high') filtered = filtered.filter(r => r.rating >= 4);
+            if (currentReviewFilter === 'low') filtered = filtered.filter(r => r.rating <= 3);
+            const tbody = document.getElementById('reviewsTable');
+            if (!filtered.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Нет отзывов</td></tr>';
+                return;
+            }
+            tbody.innerHTML = filtered.map(r => {
+                let avatarUrl = r.avatar_url;
+                if (!avatarUrl || avatarUrl === 'null' || avatarUrl === '') {
+                    avatarUrl = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(r.username || 'User')}`;
+                }
+                return `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td><strong>${escapeHtml(r.username)}</strong></td>
+                        <td><img src="${avatarUrl}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" onerror="this.src='https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(r.username)}'"></td>
+                        <td>${escapeHtml(r.movie_title || 'Сорт риса')}</td>
+                        <td class="rating-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)} (${r.rating}/5)</td>
+                        <td class="review-comment" title="${escapeHtml(r.comment || '')}">${escapeHtml(r.comment || 'Без комментария')}</td>
+                        <td>${new Date(r.created_at).toLocaleDateString('ru-RU')}</td>
+                        <td><button class="action-btn delete" onclick="deleteReview(${r.id})"><i class="fas fa-trash"></i> Удалить</button></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateReviewStats() {
+            const positive = allReviews.filter(r => r.rating >= 4).length;
+            const negative = allReviews.filter(r => r.rating <= 3).length;
+            const avg = allReviews.length ? (allReviews.reduce((s, r) => s + r.rating, 0) / allReviews.length).toFixed(1) : 0;
+            document.getElementById('avgRatingCard').textContent = avg;
+            document.getElementById('positiveCount').textContent = positive;
+            document.getElementById('negativeCount').textContent = negative;
+        }
+
+        function filterReviews(type) {
+            currentReviewFilter = type;
+            const btns = document.querySelectorAll('#reviewsSection .filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            displayReviews();
+        }
+
+        async function deleteReview(id) {
+            if (!confirm('Удалить этот отзыв?')) return;
+            try {
+                const res = await fetch(`/api/admin/reviews/${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    alert('Отзыв удален');
+                    loadReviews();
+                    loadDashboard();
+                } else {
+                    alert('Ошибка удаления');
+                }
+            } catch(e) { alert('Ошибка: ' + e.message); }
+        }
+
+        // ========== ЗАЯВКИ (С РАСЧЁТОМ СТОИМОСТИ) ==========
+        async function loadRequests() {
+            try {
+                const res = await fetch(`/api/requests?status=${currentRequestFilter}`);
+                const data = await res.json();
+                const tbody = document.getElementById('requestsTable');
+                if (!data.length) { 
+                    tbody.innerHTML = '<tr><td colspan="14">Нет заявок</td></tr>'; 
+                    return; 
+                }
+                tbody.innerHTML = data.map(r => `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${escapeHtml(r.phone)}</td>
+                        <td>${r.messenger}</td>
+                        <td>${escapeHtml(r.messenger_contact)}</td>
+                        <td>${escapeHtml(r.material_name)}</td>
+                        <td>${(r.volume || 0).toLocaleString()}</td>
+                        <td>${r.weight_per_unit || '—'}</td>
+                        <td>${r.total_kg ? r.total_kg.toFixed(1) : '—'}</td>
+                        <td>${r.price_per_unit ? r.price_per_unit.toLocaleString() : '—'}</td>
+                        <td class="total-price-cell">${r.total_price ? r.total_price.toLocaleString() : '—'} ₽</td>
+                        <td>${r.discount && r.discount > 0 ? `<span class="discount-badge-table">-${r.discount}%</span>` : '—'}</td>
+                        <td>
+                            <select class="status-select" onchange="updateRequestStatus(${r.id}, this.value)">
+                                <option value="active" ${r.status === 'active' ? 'selected' : ''}>🟡 Активная</option>
+                                <option value="working" ${r.status === 'working' ? 'selected' : ''}>🟠 В работе</option>
+                                <option value="closed" ${r.status === 'closed' ? 'selected' : ''}>🟢 Закрыта</option>
+                            </select>
+                        </td>
+                        <td>${new Date(r.created_at).toLocaleDateString('ru-RU')}</td>
+                        <td><button class="action-btn delete" onclick="deleteRequest(${r.id})"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error('Ошибка загрузки заявок:', e); }
+        }
+        
+        async function updateRequestStatus(id, status) {
+            await fetch(`/api/requests/${id}/status`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) });
+            loadRequests(); loadDashboard();
+        }
+        
+        async function deleteRequest(id) { 
+            if(confirm('Удалить заявку?')){ 
+                await fetch(`/api/requests/${id}`, { method: 'DELETE' }); 
+                loadRequests(); 
+                loadDashboard(); 
+            } 
+        }
+        
+        function filterRequests(status) { 
+            currentRequestFilter = status; 
+            // Переключаем активную кнопку
+            document.querySelectorAll('#requestsSection .filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            loadRequests(); 
+        }
+
+        // ПОЛЬЗОВАТЕЛИ
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/admin/users');
+                const users = await res.json();
+                document.getElementById('usersTable').innerHTML = users.map(u => `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${escapeHtml(u.username)}</td>
+                        <td>${escapeHtml(u.email)}</td>
+                        <td>
+                            <select class="status-select" onchange="updateUserRole(${u.id}, this.value)">
+                                <option value="user" ${u.role === 'user' ? 'selected' : ''}>Пользователь</option>
+                                <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Админ</option>
+                            </select>
+                        </td>
+                        <td><img src="${u.avatar_url || 'https://ui-avatars.com/api/?background=d4a373&color=fff&name=' + encodeURIComponent(u.username)}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"></td>
+                        <td>${new Date(u.created_at).toLocaleDateString('ru-RU')}</td>
+                        <td><button class="action-btn delete" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+        
+        async function updateUserRole(id, role) { 
+            await fetch(`/api/admin/users/${id}/role`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role }) }); 
+            alert('Роль обновлена'); 
+        }
+        
+        async function deleteUser(id) { 
+            if(confirm('Удалить пользователя?')){ 
+                await fetch(`/api/admin/users/${id}`, { method: 'DELETE' }); 
+                loadUsers(); 
+                loadDashboard(); 
+            } 
+        }
+
+        // СОРТА РИСА
+        async function loadMaterials() {
+            try {
+                const res = await fetch('/movies');
+                const rice = await res.json();
+                document.getElementById('materialsTable').innerHTML = rice.map(c => `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${escapeHtml(c.title)}</td>
+                        <td>${c.release_year || 'Стандартная'}</td>
+                        <td>${c.genre_name || 'Рис'}</td>
+                        <td><input type="number" id="price-${c.id}" value="${c.duration_minutes || 1000}" style="width: 120px; background: var(--primary-dark); border: 1px solid var(--border-color); color: white; padding: 5px; border-radius: 5px;"></td>
+                        <td><button class="action-btn" style="background: var(--accent-orange-bright); color: var(--primary-black); padding:5px 12px; border-radius:5px; border:none; cursor:pointer;" onclick="updatePrice(${c.id})"><i class="fas fa-save"></i> Сохранить</button></td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+        
+        async function updatePrice(id) {
+            const newPrice = document.getElementById(`price-${id}`).value;
+            await fetch(`/api/movies/${id}/price`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ price: parseInt(newPrice) })
+            });
+            alert('Цена обновлена');
+        }
+
+        function openAddMaterialModal() { 
+            document.getElementById('addMaterialModal').style.display = 'flex'; 
+        }
+        
+        function closeModal() { 
+            document.getElementById('addMaterialModal').style.display = 'none'; 
+        }
+        
+        document.getElementById('addMaterialForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await fetch('/api/movies', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: document.getElementById('materialName').value,
+                    release_year: document.getElementById('materialFraction').value,
+                    genre_id: 1,
+                    duration_minutes: parseInt(document.getElementById('materialPrice').value),
+                    description: `Сорт риса: ${document.getElementById('materialName').value}`
+                })
+            });
+            alert('Сорт риса добавлен');
+            closeModal();
+            loadMaterials();
+        });
+
+        document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await fetch('/logout');
+            window.location.href = '/';
+        });
+
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', checkAdmin);
+        
+        window.showSection = showSection;
+        window.filterRequests = filterRequests;
+        window.filterReviews = filterReviews;
+        window.updateRequestStatus = updateRequestStatus;
+        window.deleteRequest = deleteRequest;
+        window.deleteReview = deleteReview;
+        window.updateUserRole = updateUserRole;
+        window.deleteUser = deleteUser;
+        window.updatePrice = updatePrice;
+        window.openAddMaterialModal = openAddMaterialModal;
+        window.closeModal = closeModal;
+    </script>
+</body>
+</html>

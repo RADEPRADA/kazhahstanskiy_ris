@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Казахстанский Рис</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-black: #0a0a0a;
+            --primary-gray: #2a2a2a;
+            --accent-orange: #d4a373;
+            --accent-orange-light: #e9c9a0;
+            --accent-orange-bright: #f0d5b0;
+            --text-light: #f5f0eb;
+            --text-gray: #c4b8a8;
+            --border-color: #3d352e;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: radial-gradient(ellipse at 20% 30%, #1a150e, #0a0a0a);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(212, 163, 115, 0.3);
+            z-index: 100;
+            padding: 12px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.6rem;
+            color: var(--accent-orange-bright);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--accent-orange-bright);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange-bright);
+        }
+
+        .user-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-small {
+            padding: 6px 16px;
+            background: rgba(212, 163, 115, 0.15);
+            border: 1px solid rgba(212, 163, 115, 0.4);
+            border-radius: 30px;
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .btn-small:hover {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Основной контент */
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+        }
+
+        /* Карточка входа */
+        .login-wrapper {
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-card {
+            background: rgba(10, 15, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid rgba(212, 163, 115, 0.35);
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .login-card:hover {
+            border-color: rgba(212, 163, 115, 0.7);
+            transform: translateY(-5px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-strip {
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-orange-light), var(--accent-orange));
+            background-size: 200% 100%;
+            animation: stripMove 4s linear infinite;
+        }
+
+        @keyframes stripMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .card-content {
+            padding: 40px 35px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .icon-circle i {
+            font-size: 2rem;
+            color: var(--primary-black);
+        }
+
+        .login-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .login-header p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Поля ввода */
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-orange);
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 13px 18px 13px 45px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(212, 163, 115, 0.3);
+            border-radius: 40px;
+            color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #5a5a5a;
+        }
+
+        /* Кнопка входа */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+            border: none;
+            border-radius: 40px;
+            color: var(--primary-black);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            margin-top: 10px;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 163, 115, 0.35);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 163, 115, 0.2);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Сообщения */
+        .message {
+            margin-top: 20px;
+            padding: 10px 16px;
+            border-radius: 40px;
+            text-align: center;
+            animation: fadeIn 0.4s;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.success {
+            background: rgba(76, 175, 80, 0.12);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+        }
+
+        .message.error {
+            background: rgba(244, 67, 54, 0.12);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(212, 163, 115, 0.2);
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .user-section {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-content {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-content {
+                padding: 25px 20px;
+            }
+            .login-header h2 {
+                font-size: 1.5rem;
+            }
+            .icon-circle {
+                width: 55px;
+                height: 55px;
+            }
+            .icon-circle i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">
+                    <i class="fas fa-seedling logo-icon"></i>
+                    <span class="logo-text">Казахстанский<span>Рис</span></span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/schedule">О компании</a></li>
+                    <li><a href="/movies-page">Сорта</a></li>
+                    <li><a href="/reviews-page">Отзывы</a></li>
+                    <li><a href="/request">Заявка</a></li>
+                    <li><a href="/profile">Профиль</a></li>
+                    <li><a href="/admin">Админ</a></li>
+                </ul>
+                <div class="user-section">
+                    <a href="/login" class="btn-small">Вход</a>
+                    <a href="/register" class="btn-small">Регистрация</a>
+                </div>
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="login-wrapper">
+            <div class="login-card">
+                <div class="card-strip"></div>
+                <div class="card-content">
+                    <div class="login-header">
+                        <div class="icon-circle">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h2>Добро пожаловать</h2>
+                        <p>Войдите в личный кабинет</p>
+                    </div>
+
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <label><i class="fas fa-user"></i> Имя пользователя</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="username" placeholder="Введите ваше имя" autocomplete="username">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label><i class="fas fa-lock"></i> Пароль</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-key"></i>
+                                <input type="password" id="password" placeholder="Введите пароль" autocomplete="current-password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <i class="fas fa-arrow-right-to-bracket"></i>
+                            <span>Войти в систему</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="register-link">
+                        Нет аккаунта? <a href="/register">Создать аккаунт <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div id="message"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-copyright"></i> 2026 Казахстанский Рис — Премиум качество</p>
+            <p><i class="fas fa-phone"></i> 8 (961) 924-50-24 | 8 (905) 898-07-88</p>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка входа
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            const submitBtn = this.querySelector('.login-btn');
+            
+            if (!username || !password) {
+                messageDiv.innerHTML = '<div class="message error"><i class="fas fa-exclamation-triangle"></i> Заполните все поля</div>';
+                return;
+            }
+            
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Вход...';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageDiv.innerHTML = '<div class="message success"><i class="fas fa-check-circle"></i> Вход выполнен! Перенаправление...</div>';
+                    
+                    const card = document.querySelector('.login-card');
+                    card.style.borderColor = '#4caf50';
+                    
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1500);
+                } else {
+                    messageDiv.innerHTML = `<div class="message error"><i class="fas fa-exclamation-circle"></i> ${data.error || 'Неверные имя пользователя или пароль'}</div>`;
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Эффект встряски
+                    const form = document.querySelector('.login-card');
+                    form.style.animation = 'shake 0.4s ease-in-out';
+                    setTimeout(() => {
+                        form.style.animation = '';
+                    }, 400);
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="message error"><i class="fas fa-plug"></i> Ошибка соединения с сервером</div>';
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Анимация встряски
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-6px); }
+                40% { transform: translateX(6px); }
+                60% { transform: translateX(-3px); }
+                80% { transform: translateX(3px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Адаптивное меню
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Проверка авторизации
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                if (data.user) {
+                    const messageDiv = document.getElementById('message');
+                    messageDiv.innerHTML = '<div class="message success"><i class="fas fa-info-circle"></i> Вы уже авторизованы. Перенаправление...</div>';
+                    setTimeout(() => window.location.href = '/', 2000);
+                }
+            } catch (error) {}
+        }
+        
+        // Анимация появления полей
+        const inputs = document.querySelectorAll('.input-wrapper input');
+        inputs.forEach((input, index) => {
+            input.style.opacity = '0';
+            input.style.transform = 'translateX(-15px)';
+            setTimeout(() => {
+                input.style.transition = 'all 0.4s ease';
+                input.style.opacity = '1';
+                input.style.transform = 'translateX(0)';
+            }, 100 + index * 100);
+        });
+        
+        checkAuth();
+    </script>
+</body>
+</html>

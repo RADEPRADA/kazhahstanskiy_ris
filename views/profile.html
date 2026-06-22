@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Казахстанский Рис</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-black: #0a0a0a;
+            --primary-gray: #2a2a2a;
+            --accent-orange: #d4a373;
+            --accent-orange-light: #e9c9a0;
+            --accent-orange-bright: #f0d5b0;
+            --text-light: #f5f0eb;
+            --text-gray: #c4b8a8;
+            --border-color: #3d352e;
+            --discount-color: #4caf50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--primary-black);
+            color: var(--text-light);
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        header {
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-orange-bright);
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        
+        .logo i {
+            color: var(--accent-orange-bright);
+            margin-right: 8px;
+        }
+        
+        .logo:hover {
+            color: var(--accent-orange);
+        }
+        
+        .company-badge {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-badge:hover {
+            opacity: 1;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--accent-orange-bright);
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-orange-bright);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-name {
+            color: var(--accent-orange-bright);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .btn-small {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .btn-small:hover {
+            background: var(--accent-orange-bright);
+            transform: translateY(-2px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            padding: 25px 0;
+            text-align: center;
+            border-top: 2px solid var(--accent-orange);
+            margin-top: 60px;
+        }
+        
+        footer p {
+            color: var(--text-gray);
+            margin: 5px 0;
+            font-size: 0.8rem;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        
+        .profile-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-black);
+            letter-spacing: 2px;
+        }
+        
+        .profile-header p {
+            color: var(--primary-black);
+            opacity: 0.85;
+            letter-spacing: 1px;
+        }
+        
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--text-gray);
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-family: 'Georgia', serif;
+        }
+        
+        .tab-btn:hover {
+            background: var(--primary-dark);
+            color: var(--accent-orange-bright);
+        }
+        
+        .tab-btn.active {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .profile-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+        
+        .avatar-section {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+        
+        .avatar-preview {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-orange-bright);
+            margin-bottom: 20px;
+        }
+        
+        .avatar-url-input {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            margin: 12px 0;
+            font-size: 0.85rem;
+            font-family: 'Georgia', serif;
+        }
+        
+        .avatar-url-input:focus {
+            outline: none;
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .update-avatar-btn {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .update-avatar-btn:hover {
+            background: var(--accent-orange-bright);
+        }
+        
+        .right-panel {
+            background: var(--primary-gray);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-family: 'Georgia', serif;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange-bright);
+        }
+        
+        .btn-save {
+            background: var(--accent-orange-bright);
+            color: var(--primary-black);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-save:hover {
+            background: var(--accent-orange);
+        }
+        
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.85rem;
+        }
+        
+        .message.success {
+            background: rgba(212, 163, 115, 0.2);
+            border: 1px solid var(--accent-orange-bright);
+            color: var(--accent-orange-bright);
+            display: block;
+        }
+        
+        .message.error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            display: block;
+        }
+        
+        hr {
+            border-color: var(--border-color);
+            margin: 25px 0;
+        }
+        
+        .info-text {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+        
+        .url-preview {
+            margin-top: 10px;
+            padding: 8px;
+            background: var(--primary-dark);
+            border-radius: 5px;
+            font-size: 0.75rem;
+            word-break: break-all;
+            display: none;
+        }
+        
+        /* Таблица заявок */
+        .requests-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .requests-table th,
+        .requests-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .requests-table th {
+            background: var(--primary-dark);
+            color: var(--accent-orange-bright);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .requests-table tr:hover {
+            background: var(--primary-dark);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: rgba(212, 163, 115, 0.2);
+            color: var(--accent-orange-bright);
+        }
+        
+        .status-completed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+        
+        .status-cancelled {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+        
+        .empty-requests {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-gray);
+        }
+        
+        .request-filter {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-orange);
+            color: var(--primary-black);
+            border-color: var(--accent-orange);
+        }
+        
+        .discount-badge-table {
+            display: inline-block;
+            background: var(--discount-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links li a {
+                font-size: 0.85rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            .company-badge {
+                font-size: 0.6rem;
+                padding: 2px 10px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .avatar-section {
+                position: static;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .user-section {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .requests-table {
+                font-size: 0.85rem;
+            }
+            
+            .requests-table th,
+            .requests-table td {
+                padding: 8px;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-header h1 {
+                font-size: 1.5rem;
+            }
+            .avatar-preview {
+                width: 140px;
+                height: 140px;
+            }
+            .requests-table {
+                display: block;
+                overflow-x: auto;
+            }
+            .tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .tab-btn {
+                text-align: center;
+            }
+            .company-badge {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo"><i class="fas fa-seedling"></i> Казахстанский Рис</a>
+            
+            <!-- УПОМИНАНИЕ ООО «СВ-КАПИТАЛ» В УГЛУ -->
+            <span class="company-badge">ООО «СВ-КАПИТАЛ»</span>
+            
+            <ul class="nav-links">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/schedule">О компании</a></li>
+                <li><a href="/movies-page">Сорта</a></li>
+                <li><a href="/reviews-page">Отзывы</a></li>
+                <li><a href="/request">Заявка</a></li>
+                <li><a href="/profile">Профиль</a></li>
+                <li><a href="/admin" id="adminLink" style="display: none;">Админ</a></li>
+            </ul>
+            <div class="user-section">
+                <div id="userDisplay" style="display: none;" class="user-info">
+                    <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                    <span class="user-name" id="username"></span>
+                </div>
+                <a href="#" class="btn-small" id="logoutBtn">Выход</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <div class="profile-header">
+        <div class="container">
+            <h1><i class="fas fa-user-circle"></i> Личный кабинет</h1>
+            <p>Управление профилем и заявками на рис</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile-container">
+            <!-- Левая колонка - Аватар -->
+            <div class="avatar-section">
+                <img id="avatarPreview" class="avatar-preview" src="https://via.placeholder.com/180x180?text=Avatar" alt="Аватар">
+                <div class="info-text" style="margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> Вставьте прямую ссылку на изображение
+                </div>
+                <input type="text" id="avatarUrl" class="avatar-url-input" placeholder="https://example.com/avatar.jpg">
+                <div id="urlPreview" class="url-preview"></div>
+                <button class="update-avatar-btn" onclick="updateAvatarOnly()">
+                    <i class="fas fa-sync-alt"></i> Сохранить аватар
+                </button>
+                <div class="info-text">
+                    <i class="fas fa-link"></i> Пример: https://i.imgur.com/photo.jpg
+                </div>
+            </div>
+
+            <!-- Правая колонка - Вкладки -->
+            <div class="right-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="profile">👤 Профиль</button>
+                    <button class="tab-btn" data-tab="requests">📋 Мои заявки</button>
+                </div>
+
+                <!-- Вкладка Профиль -->
+                <div id="tab-profile" class="tab-content active">
+                    <div id="message" class="message"></div>
+                    
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Имя пользователя</label>
+                            <input type="text" id="usernameInput" name="username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" id="emailInput" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-info-circle"></i> О себе</label>
+                            <textarea id="bioInput" name="bio" placeholder="Расскажите о себе..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-save">
+                            <i class="fas fa-save"></i> Сохранить данные
+                        </button>
+                    </form>
+                    
+                    <hr>
+                    
+                    <h3><i class="fas fa-lock"></i> Смена пароля</h3>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label><i class="fas fa-key"></i> Текущий пароль</label>
+                            <input type="password" id="currentPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> Новый пароль</label>
+                            <input type="password" id="newPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-check-circle"></i> Подтвердите новый пароль</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-save">
+                            <i class="fas fa-key"></i> Сменить пароль
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Вкладка Мои заявки -->
+                <div id="tab-requests" class="tab-content">
+                    <div class="request-filter">
+                        <button class="filter-btn active" data-status="all">Все</button>
+                        <button class="filter-btn" data-status="active">Активные</button>
+                        <button class="filter-btn" data-status="completed">Выполненные</button>
+                        <button class="filter-btn" data-status="cancelled">Отменённые</button>
+                    </div>
+                    <div id="requestsList">
+                        <div style="text-align: center; padding: 40px;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Загрузка заявок...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Казахстанский Рис — премиум качество. Все права защищены.</p>
+            <p><i class="fas fa-phone"></i> Отдел продаж: 8 (961) 924-50-24 | 8 (901) 115-63-63</p>
+            <p><i class="fas fa-envelope"></i> Email: oren-svcapital@mail.ru</p>
+            <p><i class="fas fa-map-marker-alt"></i> Адрес: Оренбург, Загородное шоссе, д. 13/8</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentUser = null;
+        let allRequests = [];
+        
+        // Стили для уведомлений
+        const notificationStyle = document.createElement('style');
+        notificationStyle.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(notificationStyle);
+        
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'warning' ? '#f44336' : (type === 'success' ? '#4caf50' : '#ff9800')};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                z-index: 10001;
+                font-size: 14px;
+                font-family: 'Georgia', serif;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+                cursor: pointer;
+            `;
+            notification.innerHTML = `<i class="fas ${type === 'warning' ? 'fa-exclamation-triangle' : (type === 'success' ? 'fa-check-circle' : 'fa-info-circle')}"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Проверяем параметр error в URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === 'not_authorized') {
+            showNotification('Для доступа к профилю необходимо авторизоваться', 'warning');
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 2000);
+        }
+        
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                
+                if (!data.user) {
+                    showNotification('Для доступа к профилю необходимо авторизоваться', 'warning');
+                    setTimeout(() => {
+                        window.location.href = '/login?error=not_authorized';
+                    }, 1500);
+                    return;
+                }
+                
+                currentUser = data.user;
+                document.getElementById('username').textContent = data.user.username;
+                
+                const avatarImg = document.getElementById('userAvatar');
+                if (data.user.avatar_url && data.user.avatar_url !== 'null') {
+                    avatarImg.src = data.user.avatar_url;
+                } else {
+                    avatarImg.src = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(data.user.username)}`;
+                }
+                document.getElementById('userDisplay').style.display = 'flex';
+                
+                if (data.user.role === 'admin') {
+                    document.getElementById('adminLink').style.display = 'block';
+                }
+                
+                await loadProfile();
+                await loadUserRequests();
+            } catch (error) {
+                console.error('Ошибка загрузки пользователя:', error);
+                showMessage('Ошибка загрузки данных', 'error');
+            }
+        }
+        
+        async function loadProfile() {
+            try {
+                const response = await fetch('/api/user/profile');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const user = data.user;
+                    document.getElementById('usernameInput').value = user.username || '';
+                    document.getElementById('emailInput').value = user.email || '';
+                    document.getElementById('bioInput').value = user.bio || '';
+                    document.getElementById('avatarUrl').value = user.avatar_url || '';
+                    
+                    if (user.avatar_url && user.avatar_url !== 'null') {
+                        document.getElementById('avatarPreview').src = user.avatar_url;
+                    } else {
+                        document.getElementById('avatarPreview').src = `https://ui-avatars.com/api/?background=d4a373&color=fff&name=${encodeURIComponent(user.username || 'User')}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки профиля:', error);
+                showMessage('Ошибка загрузки профиля', 'error');
+            }
+        }
+        
+        async function loadUserRequests() {
+            try {
+                const response = await fetch('/api/user/requests');
+                const data = await response.json();
+                
+                if (data.success) {
+                    allRequests = data.requests;
+                    filterRequests('all');
+                } else {
+                    console.error('Ошибка загрузки заявок');
+                    document.getElementById('requestsList').innerHTML = `
+                        <div class="empty-requests">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Ошибка загрузки заявок</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('requestsList').innerHTML = `
+                    <div class="empty-requests">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Ошибка загрузки заявок</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function filterRequests(status) {
+            let filtered = [];
+            
+            if (status === 'all') {
+                filtered = allRequests;
+            } else if (status === 'active') {
+                filtered = allRequests.filter(r => r.status === 'active');
+            } else if (status === 'completed') {
+                filtered = allRequests.filter(r => r.status === 'completed');
+            } else if (status === 'cancelled') {
+                filtered = allRequests.filter(r => r.status === 'cancelled');
+            }
+            
+            displayRequests(filtered);
+        }
+        
+        function displayRequests(requests) {
+            const container = document.getElementById('requestsList');
+            
+            if (!requests || requests.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-requests">
+                        <i class="fas fa-folder-open"></i>
+                        <p>У вас пока нет заявок</p>
+                        <a href="/request" class="btn-save" style="display: inline-block; margin-top: 15px; text-decoration: none;">Оставить заявку</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const getStatusText = (status) => {
+                switch(status) {
+                    case 'active': return 'Активна';
+                    case 'completed': return 'Выполнена';
+                    case 'cancelled': return 'Отменена';
+                    default: return status;
+                }
+            };
+            
+            const getStatusClass = (status) => {
+                switch(status) {
+                    case 'active': return 'status-active';
+                    case 'completed': return 'status-completed';
+                    case 'cancelled': return 'status-cancelled';
+                    default: return 'status-active';
+                }
+            };
+            
+            container.innerHTML = `
+                <table class="requests-table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Сорт риса</th>
+                            <th>Кол-во (уп.)</th>
+                            <th>Тип клиента</th>
+                            <th>Скидка</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${requests.map(req => `
+                            <tr>
+                                <td>${new Date(req.created_at).toLocaleDateString('ru-RU')}</td>
+                                <td>${escapeHtml(req.material_name || 'Сорт риса')}</td>
+                                <td>${req.volume ? req.volume.toLocaleString() : 'по запросу'}</td>
+                                <td>${req.client_type === 'physical' ? 'Физ. лицо' : 'Юр. лицо'}</td>
+                                <td>${req.discount && req.discount > 0 ? `<span class="discount-badge-table">-${req.discount}%</span>` : '—'}</td>
+                                <td><span class="status-badge ${getStatusClass(req.status)}">${getStatusText(req.status)}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        document.getElementById('avatarUrl').addEventListener('input', function() {
+            const url = this.value.trim();
+            const previewDiv = document.getElementById('urlPreview');
+            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                previewDiv.style.display = 'block';
+                previewDiv.innerHTML = `<i class="fas fa-eye"></i> Превью: <img src="${url}" style="max-height: 40px; border-radius: 5px; margin-left: 10px;" onerror="this.style.display='none'; this.previousSibling.textContent=' Неверная ссылка'">`;
+            } else {
+                previewDiv.style.display = 'none';
+            }
+        });
+        
+        async function updateAvatarOnly() {
+            const avatarUrl = document.getElementById('avatarUrl').value.trim();
+            
+            if (!avatarUrl) {
+                showMessage('Введите ссылку на изображение', 'error');
+                return;
+            }
+            
+            if (!avatarUrl.startsWith('http://') && !avatarUrl.startsWith('https://')) {
+                showMessage('Ссылка должна начинаться с http:// или https://', 'error');
+                return;
+            }
+            
+            const img = new Image();
+            img.onload = async function() {
+                try {
+                    const response = await fetch('/api/user/avatar', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ avatar_url: avatarUrl })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        document.getElementById('avatarPreview').src = avatarUrl;
+                        document.getElementById('userAvatar').src = avatarUrl;
+                        showMessage('Аватар успешно обновлен!', 'success');
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showMessage(data.error || 'Ошибка обновления аватара', 'error');
+                    }
+                } catch (error) {
+                    console.error('Ошибка запроса:', error);
+                    showMessage('Ошибка при обновлении аватара: ' + error.message, 'error');
+                }
+            };
+            
+            img.onerror = function() {
+                showMessage('Не удалось загрузить изображение по указанной ссылке. Проверьте, что ссылка ведет напрямую на картинку (jpg, png, gif).', 'error');
+            };
+            
+            img.src = avatarUrl;
+        }
+        
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('usernameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const bio = document.getElementById('bioInput').value.trim();
+            
+            if (!username || !email) {
+                showMessage('Заполните имя пользователя и email', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/user/profile', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, bio })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Данные успешно обновлены!', 'success');
+                    document.getElementById('username').textContent = username;
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showMessage(data.error || 'Ошибка обновления данных', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showMessage('Ошибка при обновлении данных: ' + error.message, 'error');
+            }
+        });
+        
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                showMessage('Новые пароли не совпадают', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showMessage('Пароль должен содержать минимум 6 символов', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/user/password', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ current_password: currentPassword, new_password: newPassword })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Пароль успешно изменен!', 'success');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    showMessage(data.error || 'Ошибка смены пароля', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showMessage('Ошибка при смене пароля', 'error');
+            }
+        });
+        
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            setTimeout(() => {
+                messageDiv.className = 'message';
+            }, 5000);
+        }
+        
+        // Вкладки
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+            });
+        });
+        
+        // Фильтры заявок
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const status = btn.dataset.status;
+                
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                filterRequests(status);
+            });
+        });
+        
+        document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await fetch('/logout');
+            window.location.href = '/';
+        });
+        
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        document.addEventListener('DOMContentLoaded', loadUserData);
+        
+        window.updateAvatarOnly = updateAvatarOnly;
+    </script>
+</body>
+</html>
